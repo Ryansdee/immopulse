@@ -1,0 +1,11 @@
+{
+    "title": "Appartement à Lyon",
+    "price": 250000,
+    "location": "Lyon, France",
+    "description": "Bel appartement lumineux avec balcon",
+    "photos": [
+      "https://exemple.com/photo1.jpg",
+      "https://exemple.com/photo2.jpg"
+    ]
+  }
+  
