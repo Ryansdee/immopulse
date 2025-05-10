@@ -9,6 +9,7 @@ import ContactPage from './pages/ContactPage'; // Import de la page "Contact"
 import LoginPage from './pages/LoginPage'; // Import de la page "Connexion"
 import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage';
+import PropertyDetails from './pages/PropertyDetails';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/property/:id" element={<PropertyDetails />} />
         </Routes>
       </div>
     </Router>

@@ -72,6 +72,23 @@ app.get('/api/property-images/:id', (req, res) => {
   res.json(imageUrls);
 });
 
+// Récupérer une propriété spécifique par ID
+app.get('/api/properties/:id', (req, res) => {
+  const propertyId = req.params.id;
+
+  db.query('SELECT * FROM properties WHERE id = ?', [propertyId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: 'Erreur lors de la récupération de la propriété' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Propriété non trouvée' });
+    }
+
+    res.json(results[0]); // Retourne un seul objet, pas un tableau
+  });
+});
+
 
 
 // Ajouter une nouvelle propriété

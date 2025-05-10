@@ -281,7 +281,7 @@ const HomePage = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            {property.location}
+            {property.city} {property.postal_code}, {property.region}
           </p>
         </div>
         <span className="font-bold text-xl text-blue-600">{property.price} €</span>
@@ -308,7 +308,7 @@ const HomePage = () => {
       </div>
       <Link
         to={`/property/${property.id}`}
-        className="mt-5 block text-center py-2 px-4 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-300"
+        className="mt-5 block text-center py-2 px-4 bg-white border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-md transition-colors duration-300"
       >
         Voir les détails
       </Link>

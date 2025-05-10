@@ -1,0 +1,45 @@
+/* Le conteneur de la carte */
+#map {
+    height: 500px; /* Hauteur de la carte */
+    width: 100%; /* Largeur de la carte */
+    border-radius: 10px; /* Bordure arrondie */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée subtile */
+    overflow: hidden; /* Empêche que le contenu dépasse de la carte */
+  }
+  
+  /* Style des marqueurs */
+  .leaflet-marker-icon {
+    border-radius: 50%; /* Marqueur circulaire */
+    border: 2px solid #4CAF50; /* Bordure verte pour les marqueurs */
+    background-color: #4CAF50; /* Marqueur avec un fond vert */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); /* Ombre portée autour du marqueur */
+  }
+  
+  /* Style du popup */
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px; /* Bordures arrondies pour le popup */
+    background-color: #ffffff; /* Fond blanc pour le popup */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre portée pour le popup */
+  }
+  
+  /* Texte du popup */
+  .leaflet-popup-content {
+    font-size: 14px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  /* Style des boutons de zoom de la carte */
+  .leaflet-control-zoom {
+    background-color: rgba(255, 255, 255, 0.6); /* Fond semi-transparent */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style des tuiles de la carte */
+  .leaflet-tile {
+    filter: brightness(0.9); /* Rendre les tuiles légèrement plus sombres */
+  }
+  
