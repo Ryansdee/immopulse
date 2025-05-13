@@ -1,0 +1,40 @@
+.backgroundimg {
+    background-image: url('/public/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative; /* Nécessaire pour positionner le pseudo-élément */
+}
+
+.backgroundimg::before {
+    background-color: #1d4fd89b;  /* La couleur semi-transparente */
+    mix-blend-mode :color-burn;
+    content: '';  /* Contenu vide pour que l'élément soit visible */
+    display: block;
+    top: 0;
+    height: 100%;  /* Couvre toute la hauteur de l'élément */
+    position: absolute;  /* Permet de positionner le pseudo-élément au-dessus de l'image */
+    width: 100%;  /* Couvre toute la largeur de l'élément */
+    z-index: 0;
+}
+.backgroundimg .container {
+    position: relative; /* Nécessaire pour positionner le texte au-dessus de l'image */
+    z-index: 1; /* Assurez-vous que le texte est au-dessus de l'image */
+}
+
+.backgroundimg .container .text-xl{
+    background: #ffffff00;
+    width: 60% !important;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    font-weight: bold;
+    border-radius: 10px;
+}
+.backgroundimg .container h2{
+    background: #ffffff00;
+    width: 60% !important;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    font-weight: bold;
+    border-radius: 10px;
+}

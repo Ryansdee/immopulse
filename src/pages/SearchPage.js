@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Footer from '../components/Footer'; // Assurez-vous que le chemin est correct
 import { Link } from "react-router-dom";
+import axios from 'axios'; // Importez axios pour effectuer des requêtes HTTP
+import PropertyCarousel from './PropertyCarousel';
 
 const SearchPage = () => {
   const [properties, setProperties] = useState([]);
@@ -9,70 +11,30 @@ const SearchPage = () => {
   const [propertyType, setPropertyType] = useState("Tous les types");
   const [budget, setBudget] = useState("Tous les prix");
 
-  // Utilisation de useEffect pour récupérer les propriétés
+  // Utilisation de useEffect pour récupérer les propriétés depuis votre backend
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const fetchedProperties = await getFeaturedProperties();
-        setProperties(fetchedProperties);
+        const response = await axios.get('http://localhost:3030/api/properties');
+        setProperties(response.data); // Supposons que votre API renvoie un tableau d'objets de propriétés
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching properties:', error);
+        console.error('Erreur lors de la récupération des propriétés:', error);
         setLoading(false);
       }
     };
 
-    const getFeaturedProperties = async () => {
-      // Exemples de données simulées, à remplacer par une récupération réelle
-      return [
-        {
-          id: 1,
-          title: "Villa moderne",
-          type: "Villa",
-          location: "Bruxelles, Uccle",
-          price: "€425,000",
-          rooms: 4,
-          bathrooms: 2,
-          size: "220 m²",
-          imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-          tag: "Nouveau",
-        },
-        {
-          id: 2,
-          title: "Appartement de luxe",
-          type: "Appartement",
-          location: "Anvers, Centre",
-          price: "€315,000",
-          rooms: 2,
-          bathrooms: 1,
-          size: "110 m²",
-          imageUrl: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-          tag: "Populaire",
-        },
-        {
-          id: 3,
-          title: "Maison avec jardin",
-          type: "Maison",
-          location: "Gand, Périphérie",
-          price: "€390,000",
-          rooms: 3,
-          bathrooms: 2,
-          size: "180 m²",
-          imageUrl: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-          tag: "Exclusif",
-        }
-      ];
-    };
-
     fetchProperties();
-  }, []);
+  }, []); // Utilisez un tableau vide pour appeler cette fonction une seule fois au montage du composant
 
   // Filtrer les propriétés par localisation, type et budget
   const filteredProperties = properties.filter(property => {
     const locationMatch = locationFilter === "Toute la Belgique" || property.location.includes(locationFilter);
     const typeMatch = propertyType === "Tous les types" || property.type.includes(propertyType);
-    const price = parseInt(property.price.replace(/[^\d]/g, ''));
-    const budgetValue = budget === "Tous les prix" ? Infinity : parseInt(budget.replace(/[^\d]/g, ''));
+
+    const priceString = property.price.toString();  // Assurez-vous que c'est une chaîne
+    const price = parseInt(priceString.replace(/[^\d]/g, ''));  // Enlevez tout ce qui n'est pas un chiffre
+    const budgetValue = budget === "Tous les prix" ? Infinity : parseInt(budget.replace(/[^\d]/g, '')); // Même traitement pour le budget
     const priceMatch = price <= budgetValue;
 
     return locationMatch && typeMatch && priceMatch;
@@ -177,11 +139,7 @@ const SearchPage = () => {
                   <span className={`absolute top-4 left-4 bg-${property.tag === 'Nouveau' ? 'blue' : property.tag === 'Populaire' ? 'green' : 'orange'}-600 text-white px-3 py-1 rounded-full text-sm font-medium`}>
                     {property.tag}
                   </span>
-                  <img
-                    src={property.imageUrl}
-                    alt={property.title}
-                    className="w-full h-64 object-cover"
-                  />
+                  <PropertyCarousel propertyId={property.id} />
                 </div>
                 <div className="p-6">
                   <div className="flex justify-between items-start">
@@ -195,7 +153,7 @@ const SearchPage = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-xl text-blue-600 font-semibold">{property.price}</p>
+                      <p className="text-xl text-blue-600 font-semibold">{property.price} €</p>
                     </div>
                   </div>
                 </div>

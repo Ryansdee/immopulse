@@ -5,11 +5,16 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import Footer from '../components/Footer'; // Assurez-vous que le chemin est correct
+import './css/HomePage.css'; // Assurez-vous que le chemin est correct
 
 
 const HomePage = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+
+    const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
   
   const AnimatedCounter = ({ value, duration = 2000 }) => {
     const [count, setCount] = useState(0);
@@ -259,7 +264,7 @@ const HomePage = () => {
       </section>
 
       {/* Featured Properties */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 text-black">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900" id="search">Propriétés à la une</h2>
@@ -284,7 +289,7 @@ const HomePage = () => {
             {property.city} {property.postal_code}, {property.region}
           </p>
         </div>
-        <span className="font-bold text-xl text-blue-600">{property.price} €</span>
+        <span className="font-bold text-xl text-blue-600">{formatPrice(property.price)} €</span>
       </div>
       <div className="mt-4 flex items-center justify-between text-sm text-gray-600 border-t border-gray-100 pt-4">
         <span className="flex items-center">
@@ -367,10 +372,10 @@ const HomePage = () => {
     </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-white text-black">
-        <div className="container mx-auto text-black px-4 text-center">
-          <h2 className="text-3xl font-bold text-black mb-6">Prêt à trouver votre maison de rêve ?</h2>
-          <p className="text-xl text-gray-500 text-black mb-8">
+      <section className="py-16 backgroundimg text-black">
+        <div className="container mx-auto text-black px-4 text-center z-1">
+          <h2 className="text-3xl font-bold text-black mb-6 mx-auto">Prêt à trouver votre maison de rêve ?</h2>
+          <p className="text-xl text-gray-800 text-black mb-8 mx-auto">
             Inscrivez-vous dès aujourd'hui et commencez votre recherche immobilière avec ImmoPulse
             </p>
             <Link to="/register" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-800 hover:bg-blue-700 transition-colors duration-300">

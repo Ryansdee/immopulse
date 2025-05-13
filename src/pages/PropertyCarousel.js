@@ -28,7 +28,7 @@ function PropertyCarousel({ propertyId }) {
   return (
     <div className="relative mt-8 rounded-lg overflow-hidden group">
       {/* Carousel images with smooth transition */}
-      <div className="w-full h-[500px] sm:h-[600px] overflow-hidden">
+      <div className="w-full overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
